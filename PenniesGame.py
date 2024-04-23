@@ -22,11 +22,9 @@ def player_move():
 
 #--------------------------------------------------------------------------------------#
 
-def computer_move(): # Function to have the computer pick a random number of pennies to take
-                     # Should return the number of pennies the computer chooses
+def computer_move():
 
-    # Your code here
-    pass
+    return randrange(1, 6) # Computer picks a random amount, TODO - implement smart play for computer
 
 #--------------------------------------------------------------------------------------#
 
