@@ -2,10 +2,23 @@ from random import randrange # Random number function used to generate computer 
 
 #--------------------------------------------------------------------------------------#
 
-def player_move(): # Funciton to ask the user to pick how many pennies to take
-                   # Should return the number the user chooses
+def player_move():
+    valid_choice = False
 
-    # Your code here
+    while valid_choice != True:
+        try:
+            player_input = int(input("How many coins do you want to take: "))
+            if player_input not in range(1, 6):
+                raise ValueError
+        except ValueError:
+            print("Please ensure you enter an integer between 1 and 5")
+            valid_choice = False
+        except Exception as err:
+            print("Unexpected error occured:\n{err}")
+        else:
+            valid_choice = True
+    
+    return player_input
 
 #--------------------------------------------------------------------------------------#
 
@@ -13,6 +26,7 @@ def computer_move(): # Function to have the computer pick a random number of pen
                      # Should return the number of pennies the computer chooses
 
     # Your code here
+    pass
 
 #--------------------------------------------------------------------------------------#
 
@@ -21,6 +35,7 @@ def check_pennies(pennies): # Function to check if the number of pennies has rea
                             # True for more than 0 pennies, False for 0 or less
 
     # Your code here
+    pass
 
 #--------------------------------------------------------------------------------------#
 
@@ -75,5 +90,5 @@ def main(): # Main game
 
 #--------------------------------------------------------------------------------------#
 
-if __name__ == "__main__": # Auto starts the program DO NOT EDIT
+if __name__ == "__main__":
     main()
