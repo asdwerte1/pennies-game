@@ -2,6 +2,27 @@ from random import randrange # Random number function used to generate computer 
 
 #--------------------------------------------------------------------------------------#
 
+def first_move():
+
+    valid_choice = False
+
+    while valid_choice != True:
+        try:
+            player_choice = input("Would you like to go first (yes/no): ").lower()
+            if player_choice == "yes": player_choice = True
+            elif player_choice == "no": player_choice = False
+            else: raise ValueError
+        except ValueError:
+            print("Please enter either \"yes\" or \"no\"")
+        except Exception as err:
+            print(f"Unexpected error occured:\n{err}")
+        else:
+            valid_choice = True
+    return player_choice
+
+
+#--------------------------------------------------------------------------------------#
+
 def player_move():
 
     valid_choice = False
@@ -15,7 +36,7 @@ def player_move():
             print("Please ensure you enter an integer between 1 and 5")
             valid_choice = False
         except Exception as err:
-            print("Unexpected error occured:\n{err}")
+            print(f"Unexpected error occured:\n{err}")
         else:
             valid_choice = True
     
@@ -35,8 +56,8 @@ def check_pennies(pennies):
 
 #--------------------------------------------------------------------------------------#
 
-def play_again(): # Function to ask the user if they wish to play again
-                  # Would be good to add error handling here
+def play_again():
+    
     print("Would you like to play again?")
     choice = input("Enter yes or no: ").lower()
     if choice == "yes":
@@ -49,14 +70,13 @@ def play_again(): # Function to ask the user if they wish to play again
     
 #--------------------------------------------------------------------------------------#
 
-def main(): # Main game
-            # Would be good to add error handling here
+def main():
 
     play = True
 
     while play == True:
 
-        player_turn = True
+        player_turn = first_move() # Player decides whether to go first or second
         total = 20
 
         print(f"\nGame starting\nNumber of pennies: {total}")
@@ -80,9 +100,8 @@ def main(): # Main game
                 if check_pennies(total) == False: # Check if computer has lost
                     print("Player Wins!")
                     break
-        
-        # Check if player wishes to play again
-        play = play_again() # Will be true or false - true restarts loop, false exits loop
+              
+        play = play_again()# Check if player wishes to play again
 
 #--------------------------------------------------------------------------------------#
 
