@@ -1,8 +1,18 @@
 from random import randrange # Random number function used to generate computer choices
+import os
+
+def clear_screen():
+    """Clears the terminal screen of information"""
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 #--------------------------------------------------------------------------------------#
 
 def first_move():
+
+    clear_screen()
 
     valid_choice = False
 
@@ -18,6 +28,7 @@ def first_move():
             print(f"Unexpected error occured:\n{err}")
         else:
             valid_choice = True
+        clear_screen()
     return player_choice
 
 
@@ -39,14 +50,29 @@ def player_move():
             print(f"Unexpected error occured:\n{err}")
         else:
             valid_choice = True
-    
+    clear_screen()
     return player_input
 
 #--------------------------------------------------------------------------------------#
 
-def computer_move():
+def computer_move(pennies):
 
-    return randrange(1, 6) # Computer picks a random amount, TODO - implement smart play for computer
+    """Function makes computer nearly unbeatable - but is possible"""
+
+    if pennies == 1:
+        return 1
+    elif pennies < 7: # Force total to 1
+        return pennies - 1
+    elif pennies == 7: # Computer cannot win here
+        return randrange(1, 6)
+    elif pennies < 13: # Force total to 7
+        return pennies - 7
+    elif pennies == 13: # Computer in danger of loss here
+        return 1
+    elif pennies < 19: # Force total to 13
+        return pennies - 13
+    else:
+        return 1
 
 #--------------------------------------------------------------------------------------#
 
@@ -57,7 +83,7 @@ def check_pennies(pennies):
 #--------------------------------------------------------------------------------------#
 
 def play_again():
-    
+
     print("Would you like to play again?")
     choice = input("Enter yes or no: ").lower()
     if choice == "yes":
@@ -79,7 +105,7 @@ def main():
         player_turn = first_move() # Player decides whether to go first or second
         total = 20
 
-        print(f"\nGame starting\nNumber of pennies: {total}")
+        print(f"Game starting\nNumber of pennies: {total}")
 
         while True: # Infinite loop - check_pennies will break out
             if player_turn == True:
@@ -91,7 +117,7 @@ def main():
                     print("Player loses")
                     break
             else:
-                computer = computer_move()
+                computer = computer_move(total)
                 print(f"Computer takes {computer}")
                 total -= computer
                 print(f"Pennies left: {total}")
@@ -102,6 +128,8 @@ def main():
                     break
               
         play = play_again()# Check if player wishes to play again
+        
+    clear_screen()
 
 #--------------------------------------------------------------------------------------#
 
