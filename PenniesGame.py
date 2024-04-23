@@ -3,6 +3,7 @@ from random import randrange # Random number function used to generate computer 
 #--------------------------------------------------------------------------------------#
 
 def player_move():
+
     valid_choice = False
 
     while valid_choice != True:
@@ -28,12 +29,9 @@ def computer_move():
 
 #--------------------------------------------------------------------------------------#
 
-def check_pennies(pennies): # Function to check if the number of pennies has reached zero or less
-                            # Will have an input of number of pennies left, output True or False
-                            # True for more than 0 pennies, False for 0 or less
+def check_pennies(pennies):
 
-    # Your code here
-    pass
+    return True if pennies > 0 else False
 
 #--------------------------------------------------------------------------------------#
 
